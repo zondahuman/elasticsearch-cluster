@@ -1,0 +1,116 @@
+##店铺
+PUT business
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "ik": {
+          "tokenizer": "ik_max_word",
+          "type":"custom"
+        },
+        "comma": {
+          "type": "pattern",
+          "pattern": ","
+        }
+      }
+    }
+  },
+  "mappings": {
+      "busines": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "store": true
+        },
+        "userId":{
+		"type": "text",
+		"store": true
+	},
+        "businessName": {
+	  "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+	 },
+        "businessPrice": {
+	  "type": "double",
+          "index": true,
+          "store": true
+	},
+        "provinceName": {
+         "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+        "cityName": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+        "districtName": {
+           "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+        "category": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+       "field1": {
+          "type": "text",
+          "analyzer": "comma",
+          "search_analyzer": "comma",
+          "index": true,
+          "store": true
+        },
+        "field2": {
+          "type": "text",
+          "analyzer": "comma",
+          "search_analyzer": "comma",
+          "index": true,
+          "store": true
+        },
+
+        "location": {
+          "type": "geo_point"
+        },
+        "flag": {
+          "type": "text",
+          "index": true,
+          "store": true
+        },
+        "createTime":{
+          "type": "date",
+          "store": true
+        },
+        "updateTime":{
+          "type": "date",
+          "store": true
+        }
+
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+CREATE TABLE `user_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(32) DEFAULT NULL COMMENT '身份证号',
+  `age` varchar(255) DEFAULT NULL COMMENT '昵称',
+  `mobile` varchar(20) DEFAULT NULL COMMENT '手机号',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 comment '用户表';
+
+
+
+CREATE TABLE `order_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) DEFAULT NULL COMMENT '用户id',
+  `flag` varchar(20) DEFAULT NULL COMMENT '支付状态',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 comment '订单表';
+
+
+
+CREATE TABLE `business_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(255) DEFAULT NULL COMMENT '用户id',
+  `longitude` varchar(500) DEFAULT NULL COMMENT '经度',
+  `latitude` varchar(500) DEFAULT NULL COMMENT '纬度',
+  `business_name` varchar(300) DEFAULT NULL COMMENT '商品名称',
+  `business_price` decimal(14,2) DEFAULT NULL COMMENT '商品价格',
+  `province_name` varchar(300) DEFAULT NULL COMMENT '省份',
+  `city_name` varchar(300) DEFAULT NULL COMMENT '城市',
+  `district_name` varchar(300) DEFAULT NULL COMMENT '区域',
+  `category` varchar(300) DEFAULT NULL COMMENT '种类',
+  `field1` varchar(300) DEFAULT NULL COMMENT '冗余字段1',
+  `field2` varchar(300) DEFAULT NULL COMMENT '冗余字段2',
+  `flag` varchar(20) DEFAULT NULL COMMENT '执行状态',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `version` int(11) DEFAULT '0' COMMENT '版本号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商品表';
+
+
+
+

@@ -1,0 +1,192 @@
+################################--NODE1----#############################
+# 集群的名字
+cluster.name: business
+# 节点名字
+node.name: node-4
+# 索引分片个数，默认为5片
+index.number_of_shards: 5
+# 索引副本个数，默认为1个副本
+index.number_of_replicas: 1
+# 数据存储目录（多个路径用逗号:分隔）
+path.data: ./data
+# 日志目录
+path.logs: ./logs
+# 修改一下ES的监听地址，这样别的机器才可以访问
+network.host: 172.16.2.134
+# 设置节点间交互的tcp端口（集群）,默认是9300
+transport.tcp.port: 9300
+# 监听端口（默认的就好）
+http.port: 9200
+
+# 增加新的参数，这样head插件才可以访问es
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+
+
+cluster.name: business
+node.name: node-4
+node.master: true
+node.data: true
+path.data: ./data
+path.logs: ./logs
+network.host: 172.16.2.134
+transport.tcp.port: 9300
+http.port: 9200
+http.enabled: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+################################--NODE1----#############################
+
+
+
+
+
+################################--NODE2----#############################
+# 集群的名字
+cluster.name: business
+# 节点名字
+node.name: node-3
+# 索引分片个数，默认为5片
+#index.number_of_shards: 5
+# 索引副本个数，默认为1个副本
+#index.number_of_replicas: 1
+# 数据存储目录（多个路径用逗号:分隔）
+path.data: ./data
+# 日志目录
+path.logs: ./logs
+# # 修改一下ES的监听地址，这样别的机器才可以访问
+network.host: 172.16.2.133
+# 设置节点间交互的tcp端口（集群）,默认是9300
+transport.tcp.port: 9300
+# 监听端口（默认的就好）
+http.port: 9200
+
+# 增加新的参数，这样head插件才可以访问es
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+
+
+
+cluster.name: business
+node.name: node-3
+node.master: true
+node.data: true
+path.data: ./data
+path.logs: ./logs
+network.host: 172.16.2.133
+transport.tcp.port: 9300
+http.port: 9200
+http.enabled: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+################################--NODE2----#############################
+
+
+
+################################----NODE3----#############################
+# 集群的名字
+cluster.name: business
+# 节点名字
+node.name: node-2
+# 索引分片个数，默认为5片
+index.number_of_shards: 5
+# 索引副本个数，默认为1个副本
+index.number_of_replicas: 1
+# 数据存储目录（多个路径用逗号分隔）
+path.data: ./data
+# 日志目录
+path.logs: ./logs
+# 修改一下ES的监听地址，这样别的机器才可以访问
+network.host: 172.16.2.132
+# 设置节点间交互的tcp端口（集群）,默认是9300
+transport.tcp.port: 9300
+# 监听端口（默认的就好）
+http.port: 9200
+
+# 增加新的参数，这样head插件才可以访问es
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+
+
+
+cluster.name: business
+node.name: node-2
+node.master: true
+node.data: true
+path.data: ./data
+path.logs: ./logs
+network.host: 172.16.2.132
+transport.tcp.port: 9300
+http.port: 9200
+http.enabled: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+discovery.zen.ping.unicast.hosts: ["172.16.2.132", "172.16.2.133","172.16.2.134"]
+discovery.zen.minimum_master_nodes: 2
+################################----NODE3----#############################
+
+
+
+
+################################----NODE6----#############################
+# 集群的名字
+cluster.name: business
+# 节点名字
+node.name: node-6
+# 索引分片个数，默认为5片
+index.number_of_shards: 5
+# 索引副本个数，默认为1个副本
+index.number_of_replicas: 1
+# 数据存储目录（多个路径用逗号分隔）
+path.data: ./data
+# 日志目录
+path.logs: ./logs
+# 修改一下ES的监听地址，这样别的机器才可以访问
+network.host: 172.16.2.146
+# 设置节点间交互的tcp端口（集群）,默认是9300
+transport.tcp.port: 9300
+# 监听端口（默认的就好）
+http.port: 9200
+
+# 增加新的参数，这样head插件才可以访问es
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+
+
+
+cluster.name: business
+node.name: node-6
+node.master: true
+node.data: true
+path.data: ./data
+path.logs: ./logs
+network.host: 172.16.2.146
+transport.tcp.port: 9300
+http.port: 9200
+http.enabled: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+discovery.zen.ping.unicast.hosts: ["172.16.2.132", "172.16.2.133","172.16.2.134"]
+discovery.zen.minimum_master_nodes: 2
+################################----NODE6----#############################
+
+discovery.zen.ping.unicast.hosts: ["172.16.2.146"]
+discovery.zen.minimum_master_nodes: 1
+node.max_local_storage_nodes: 256  #replace 256 with another num that greater than 1
+

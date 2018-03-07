@@ -1,0 +1,70 @@
+server:
+        port: 8080  #配置端口
+        address : localhost
+        connecyion.timeout: 6000
+        tomcat.max-threads: 0
+        tomcat.uri-encoding: UTF-8
+        servlet:
+                  session:
+                            timeout: 30
+
+spring:
+      application:
+                name: elasticsearch-cluster
+      datasource:
+                url: jdbc:mysql://172.16.2.133:3306/deal?useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=convertToNull
+                username: root
+                password: root
+                driver-class-name: com.mysql.jdbc.Driver
+                #durid pool settings
+                type: com.alibaba.druid.pool.DruidDataSource
+                durid:
+                  initialSize: 5
+                  minIdle:     5
+                  maxActive:   20
+                  maxWait:     60000
+                  timeBetweenEvictionRunsMillis: 60000
+                  minEvictableIdleTimeMillis: 300000
+                  validationQuery: SELECT 1 FROM DUAL
+                  testWhileIdle: true
+                  testOnBorrow: false
+                  testOnReturn: false
+                  poolPreparedStatements: true
+                  maxPoolPreparedStatementPerConnectionSize: 20
+                  filters: stat,wall,log4j
+                  connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      data:
+          elasticsearch:
+                    cluster-name: business #默认为elasticsearch
+                    cluster-nodes: 172.16.2.132:9300,172.16.2.133:9300,172.16.2.134:9300 #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode
+#                   properties:
+#                           path:
+#                               logs: ./elasticsearch/log #elasticsearch日志存储目录
+#                               data: ./elasticsearch/data #elasticsearch数据存储目录
+
+mybatis:
+        configLocations:     mybatis-config.xml
+        mapper-locations:     classpath:mapper/*Mapper.xml
+        type-aliases-package: com.abin.lee.elasticsearch.svr.api.model
+
+logging:
+        level:
+          com:
+              abin:
+                   lee:
+                      elasticsearch:
+                                    svr:
+                                        api:
+                                            dao: debug
+              alibaba:
+                    druid: debug
+#elasticsearch settings
+#elasticsearch:
+#  host: 172.16.2.146
+#  port: 9300
+
+#spring:
+#      data:
+#          elasticsearch:
+#                    cluster-name: business #默认为elasticsearch
+#                    cluster-nodes: 172.16.2.132:9300,172.16.2.133:9300,172.16.2.134:9300 #配置es节点信息，逗号分隔，如果没有指定，则启动ClientNode

@@ -1,0 +1,336 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+#chuangjiansuoyin
+PUT "http://172.16.2.146:9200/business"
+
+POST /business/_analyze?analyzer=ik_max_word&text='朝阳区'
+
+POST /business/_analyze?analyzer=ik_max_word&text='朝阳区'
+
+DELETE /business/busines/255514
+
+DELETE /_all
+
+GET /business/health?v&pretty
+GET /business?pretty
+GET _analyze?pretty
+{
+  "analyzer": "ik_max_word",
+  "text": "中华人民共和国国歌"
+}
+GET /business/busines/_search
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "term" : {
+                    "businessName" : "日"
+                }
+            }
+        }
+    }
+}
+GET /business/busines/_search
+{
+    "query" : {
+        "term" : { "businessName" : "日" }
+    }
+}
+
+GET /business/busy/_search
+{
+   "query": {
+      "bool": {
+         "filter": {
+            "geo_distance": {
+               "distance": "1000km",
+               "location": {
+                  "lat" : 39.864968,
+            "lon" : 116.558491
+               }
+            }
+         }
+      }
+   }
+}
+
+GET /business/busy/_search
+{
+  "from" : 0,
+  "size" : 1000,
+  "post_filter" : {
+    "geo_distance" : {
+      "location" : [
+          "lat" : 39.939737,
+          "lon" : 116.606948
+      ],
+      "distance" : 100.0,
+      "distance_type" : "arc",
+      "validation_method" : "STRICT",
+      "ignore_unmapped" : false,
+      "boost" : 1.0
+    }
+  },
+  "sort" : [
+    {
+      "_geo_distance" : {
+        "location" : [
+
+          {
+            "lat" : 39.864968,
+            "lon" : 116.558491
+          }
+        ],
+        "unit" : "m",
+        "distance_type" : "arc",
+
+        "validation_method" : "STRICT"
+      }
+    }
+  ]
+}
+
+GET /business/busy/_search
+{
+    "query" : {
+        "term" : { "businessName" : "桥" }
+    }
+}
+GET /business/busy/_search
+{
+    "query": {
+        "bool" : {
+            "must" : {
+                "match_all" : {}
+            },
+            "filter" : {
+                "geo_distance" : {
+                    "distance" : "10km",
+                    "location" : {
+                        "lat" : 39.939737,
+                        "lon" : 116.606948
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+##店铺
+PUT business
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "ik": {
+          "tokenizer": "ik_max_word",
+          "type":"custom"
+        },
+        "comma": {
+          "type": "pattern",
+          "pattern": ","
+        }
+      }
+    }
+  },
+  "mappings": {
+      "busy": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "store": true
+        },
+        "userId":{
+		"type": "text",
+		"store": true
+	},
+        "businessName": {
+	  "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": "analyzed",
+          "store": true
+	 },
+        "businessPrice": {
+	  "type": "double",
+          "index": true,
+          "store": true
+	},
+        "provinceName": {
+         "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+        "cityName": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+        "districtName": {
+           "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+        "category": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "search_analyzer": "ik_max_word",
+          "index": true,
+          "store": true
+        },
+       "field1": {
+          "type": "text",
+          "analyzer": "comma",
+          "search_analyzer": "comma",
+          "index": true,
+          "store": true
+        },
+        "field2": {
+          "type": "text",
+          "analyzer": "comma",
+          "search_analyzer": "comma",
+          "index": true,
+          "store": true
+        },
+
+        "location": {
+          "type": "geo_point"
+        },
+        "flag": {
+          "type": "text",
+          "index": true,
+          "store": true
+        },
+        "createTime":{
+          "type": "date",
+          "store": true
+        },
+        "updateTime":{
+          "type": "date",
+          "store": true
+        }
+
+      }
+    }
+  }
+}
+
+
+
+PUT /my_locations
+{
+    "mappings": {
+        "location": {
+            "properties": {
+                "pin": {
+                    "properties": {
+                        "location": {
+                            "type": "geo_point"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+PUT /my_locations/location/1
+{
+    "pin" : {
+        "location" : {
+            "lat" : 40.12,
+            "lon" : -71.34
+        }
+    }
+}
+GET /my_locations/location/_search
+{
+    "query": {
+        "bool" : {
+            "must" : {
+                "match_all" : {}
+            },
+            "filter" : {
+                "geo_distance" : {
+                    "distance" : "200km",
+                    "pin.location" : {
+                        "lat" : 40,
+                        "lon" : -70
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+PUT /my_locations11
+{
+    "mappings": {
+        "location": {
+            "properties": {
+
+                        "location": {
+                            "type": "geo_point"
+                        }
+
+            }
+        }
+    }
+}
+PUT /my_locations11/location/1
+{
+        "location" : {
+            "lat" : 40.12,
+            "lon" : -71.34
+        }
+}
+GET /my_locations11/location/_search
+{
+    "query": {
+        "bool" : {
+            "must" : {
+                "match_all" : {}
+            },
+            "filter" : {
+                "geo_distance" : {
+                    "distance" : "200km",
+                    "plocation" : {
+                        "lat" : 40,
+                        "lon" : -70
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
